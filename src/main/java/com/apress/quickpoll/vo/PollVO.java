@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public record PollVO(@JsonProperty("id") Long id, @JsonProperty("question") @NotEmpty(message = "{NotEmpty.poll.question}") String question,
-                     @JsonProperty("options")  @OrderBy @Size(min=2, max = 6, message = "{Size.poll.options}") Set<Option> options) implements Serializable {
+                     @JsonProperty("options")  @OrderBy @NotEmpty(message = "{NotEmpty.poll.options}") @Size(min=2, max = 6, message = "Options must be greater than {max} and less than {min}") Set<Option> options) implements Serializable {
 
 
     public PollVO(Long id, String question, Set<Option> options) {
