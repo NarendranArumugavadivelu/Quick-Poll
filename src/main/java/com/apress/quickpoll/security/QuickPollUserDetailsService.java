@@ -1,3 +1,4 @@
+
 package com.apress.quickpoll.security;
 
 import com.apress.quickpoll.entity.User;
@@ -32,5 +33,6 @@ public class QuickPollUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }
+
 
 

@@ -1,3 +1,4 @@
+
 package com.apress.quickpoll.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,16 @@ public class SecurityConfiguration {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        return http
+         http.formLogin().and()
                 .csrf()
                 .disable()
-                .authorizeHttpRequests()
-                .and()
                 .authorizeHttpRequests().anyRequest()
                 .authenticated().and().httpBasic()
-                .realmName("Quick Poll").and().sessionManagement()
+                 .realmName("Quick Poll").and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .build();
+                .and().oauth2ResourceServer().jwt();
+        return http.build();
     }
 
     @Bean
@@ -68,3 +67,4 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
+
