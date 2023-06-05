@@ -16,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -74,6 +75,7 @@ public class PollController {
     }
 
     @DeleteMapping(path = "/polls/{pollId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Deletes a poll by id", description = "Deletes a poll by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Poll deleted successfully"),
